@@ -1,0 +1,97 @@
+﻿@page "/"
+@inject ISnackbar Snackbar
+
+<PageTitle>Copy Buttonizer - demonstration for MudBlazor</PageTitle>
+
+<MudField Label="Copy Button Position" Variant="Variant.Outlined" InnerPadding="false" Class="mb-8">
+    <MudRadioGroup @bind-SelectedOption="@_SelectedPosition">
+        <MudRadio Option="@CopyButtonPosition.Top" Color="Color.Primary">Top</MudRadio>
+        <MudRadio Option="@CopyButtonPosition.Center" Color="Color.Primary">Center</MudRadio>
+        <MudRadio Option="@CopyButtonPosition.Bottom" Color="Color.Primary">Bottom (Default)</MudRadio>
+    </MudRadioGroup>
+</MudField>
+
+<MudField Label="Plain text and normal input[type=text]" Variant="Variant.Outlined" InnerPadding="true" Class="mb-8">
+
+    <!-- Plain text -->
+    <p class="mb-3">
+        <CopyButtonize Copied="OnCopied" Title="Good job!👍" Position="CopyButtonPosition.Bottom">
+            <MudText Style="max-width:200px; word-break:break-all;">@_LoremText</MudText>
+        </CopyButtonize>
+
+        <CopyButtonize Copied="OnCopied" Position="_SelectedPosition">
+            <MudText Style="max-width:200px; word-break:break-all;">@_LoremText</MudText>
+        </CopyButtonize>
+    </p>
+
+    <!-- Normal inout[type=text] -->
+    <p class="mb-3">
+        <CopyButtonize Copied="OnCopied" Position="_SelectedPosition">
+            <input type="text" @bind-value="_Text" />
+        </CopyButtonize>
+    </p>
+
+</MudField>
+
+<!-- MudTextField -->
+<MudField Label="MudTextFiled" Variant="Variant.Outlined" InnerPadding="false">
+
+    <!-- Adornment -->
+    <MudField Label="Adornment" Variant="Variant.Text" InnerPadding="false" Class="mb-4">
+        <MudRadioGroup @bind-SelectedOption="@_SelectedAdornment">
+            <MudRadio Option="@Adornment.None" Color="Color.Primary">None</MudRadio>
+            <MudRadio Option="@Adornment.Start" Color="Color.Primary">Start</MudRadio>
+            <MudRadio Option="@Adornment.End" Color="Color.Primary">End</MudRadio>
+        </MudRadioGroup>
+    </MudField>
+
+    <!-- Single Line -->
+    <p class="mb-3">
+        <CopyButtonize Copied="OnCopied" Position="_SelectedPosition">
+            <MudTextField @bind-Value="_Text" Label="Single Line" FullWidth="false" Style="width: 200px;" Adornment="_SelectedAdornment" AdornmentIcon="@Icons.Filled.Email" Immediate="true" />
+        </CopyButtonize>
+
+        <CopyButtonize Copied="OnCopied" Position="_SelectedPosition">
+            <MudTextField @bind-Value="_Text" Label="Single Line" Variant="Variant.Outlined" Adornment="_SelectedAdornment" AdornmentIcon="@Icons.Filled.Email" Immediate="true" />
+        </CopyButtonize>
+
+        <CopyButtonize Copied="OnCopied" Position="_SelectedPosition">
+            <MudTextField @bind-Value="_Text" Label="Single Line" Variant="Variant.Filled" Style="width: 200px;" Adornment="_SelectedAdornment" AdornmentIcon="@Icons.Filled.Email" Immediate="true" />
+        </CopyButtonize>
+    </p>
+
+    <!-- Multi Line -->
+    <p class="mb-3">
+        <CopyButtonize Copied="OnCopied" Position="_SelectedPosition">
+            <MudTextField @bind-Value="_LoremText" Label="Multi Line" Variant="Variant.Text" Lines="5" Immediate="true" spellcheck="false" />
+        </CopyButtonize>
+        <CopyButtonize Copied="OnCopied" Position="_SelectedPosition">
+            <MudTextField @bind-Value="_LoremText" Label="Multi Line" Variant="Variant.Outlined" Lines="5" Immediate="true" spellcheck="false" />
+        </CopyButtonize>
+        <CopyButtonize Copied="OnCopied" Position="_SelectedPosition">
+            <MudTextField @bind-Value="_LoremText" Label="Multi Line" Variant="Variant.Filled" Lines="5" Immediate="true" spellcheck="false" />
+        </CopyButtonize>
+    </p>
+
+</MudField>
+
+@code
+{
+    private string _Text = "foo@example.com";
+
+    private string _LoremText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+
+    private Adornment _SelectedAdornment = Adornment.None;
+
+    private CopyButtonPosition _SelectedPosition = CopyButtonPosition.Bottom;
+
+    private void OnCopied()
+    {
+        Snackbar.Add("The input text was copied to the clipboard.", Severity.Success, options =>
+        {
+            options.ShowTransitionDuration = 200;
+            options.HideTransitionDuration = 200;
+            options.VisibleStateDuration = 2000;
+        });
+    }
+}

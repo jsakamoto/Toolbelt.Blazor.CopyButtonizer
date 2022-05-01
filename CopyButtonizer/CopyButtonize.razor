@@ -1,0 +1,11 @@
+﻿<div @ref="_Container"
+     class="@GetClassString()"
+     style="@ContainerStyle">
+    @ChildContent
+    <span class="copy-button"
+          tabindex="-1"
+          title="@Title"
+          style="@ButtonStyle"
+          @onmousedown="OnClickCopyButton"
+          @onmousedown:preventDefault="true"></span>
+</div>

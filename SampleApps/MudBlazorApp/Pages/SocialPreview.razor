@@ -1,0 +1,105 @@
+﻿@page "/social-preview"
+@inject ISnackbar Snackbar
+
+<style>
+    .contents {
+        display: flex;
+        outline: dashed 2px #888;
+        width: 640px;
+        height: 320px;
+    }
+
+    .container {
+        width: 320px;
+        height: 320px;
+        display: inline-block;
+        margin: 0;
+    }
+
+    .code {
+        /*border: solid 1px #ccc;*/
+        padding: 1em 0 1em 2em;
+        background-color: #444;
+        color: #ccc;
+        font-family: 'Cascadia Code';
+    }
+
+    .preview {
+        padding: 3em 0 0 3em;
+        display: inline-flex;
+        position: relative;
+        /*border: solid 1px #ccc;*/
+    }
+
+    .tooltip {
+        position: absolute;
+        font-size: 12px;
+        background-color: #fff;
+        border: solid 1px #000;
+        padding: 3px 8px;
+        font-family: 'Segoe UI';
+        left: 195px;
+        top: 98px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="contents">
+
+    <div class="container">
+
+        <div class="code">
+            &nbsp;<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;MudTextField .../&gt;<br />
+            &nbsp;
+        </div>
+
+        <div style="" class="preview">
+            <MudTextField Variant="Variant.Outlined" Label="e-mail" ReadOnly="true" @bind-Value="_Text" />
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="code">
+            &lt;CopyButtonize&gt;<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;MudTextField .../&gt;<br />
+            &lt;/CopyButtonize&gt;
+        </div>
+
+        <div class="preview">
+            <CopyButtonize Position="CopyButtonPosition.Bottom" Copied="OnCopied">
+                <MudTextField Variant="Variant.Outlined" Label="e-mail" ReadOnly="true" @bind-Value="_Text" />
+            </CopyButtonize>
+
+            @if (_ShowTooltip)
+            {
+                <div class="tooltip">
+                    Copy to clipboard.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div>
+    <MudCheckBox @bind-Checked="_ShowTooltip" Label="Show tooltip" />
+</div>
+@code
+{
+    private bool _ShowTooltip;
+
+    private string _Text = "foo@example.com";
+
+    private void OnCopied()
+    {
+        Snackbar.Add("The input text was copied to the clipboard.", Severity.Success, options =>
+        {
+            options.ShowTransitionDuration = 200;
+            options.HideTransitionDuration = 200;
+            options.VisibleStateDuration = 2000;
+        });
+    }
+}

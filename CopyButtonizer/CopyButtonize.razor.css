@@ -1,0 +1,93 @@
+﻿.copy-buttonize {
+    /*outline: dotted 1px cyan;*/
+    --copy-buttonize-button-color: rgb(66,66,66);
+    --copy-buttonize-button-image-url: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMThweCIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMThweCIgZmlsbD0iIzAwMDAwMCI+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0xNiAxSDRjLTEuMSAwLTIgLjktMiAydjE0aDJWM2gxMlYxem0zIDRIOGMtMS4xIDAtMiAuOS0yIDJ2MTRjMCAxLjEuOSAyIDIgMmgxMWMxLjEgMCAyLS45IDItMlY3YzAtMS4xLS45LTItMi0yem0wIDE2SDhWN2gxMXYxNHoiLz48L3N2Zz4=');
+    display: inline-flex;
+    position: relative;
+}
+
+    .copy-buttonize.copy-buttonize-pos-top {
+        align-items: start;
+    }
+
+    .copy-buttonize.copy-buttonize-pos-center {
+        align-items: center;
+    }
+
+    .copy-buttonize.copy-buttonize-pos-bottom {
+        align-items: end;
+    }
+
+.copy-button {
+    /*outline: dotted 2px darkorange;*/
+    display: inline-block;
+    width: 1.2em;
+    height: 1.2em;
+    position: relative;
+    margin-left: 0.2em;
+    background-color: var(--copy-buttonize-button-color);
+    -webkit-mask-image: var(--copy-buttonize-button-image-url);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: 1.2em;
+    mask-image: var(--copy-buttonize-button-image-url);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: 1.2em;
+    cursor: default;
+}
+
+/* ---- MudBlazor MudTextFiled support ---- */
+.copy-buttonize ::deep .mud-input-input-control ~ .copy-button {
+    position: absolute;
+    right: 0.4em;
+    margin: auto;
+}
+
+.copy-buttonize.copy-buttonize-pos-top ::deep .mud-input-input-control ~ .copy-button {
+    top: 1em;
+}
+
+.copy-buttonize.copy-buttonize-pos-center ::deep .mud-input-input-control ~ .copy-button {
+    top: 0.5em;
+    bottom: 0;
+}
+
+.copy-buttonize.copy-buttonize-pos-bottom ::deep .mud-input-input-control ~ .copy-button {
+    bottom: 0.6em;
+}
+
+.copy-buttonize ::deep .mud-input input {
+    width: calc(100% - 1.5em);
+}
+
+.copy-buttonize ::deep .mud-input-adornment-end {
+    margin-right: 1.7em;
+}
+
+/* outlined  */
+
+.copy-buttonize ::deep .mud-input-outlined input {
+    width: calc(100% - 2.5em);
+}
+
+.copy-buttonize ::deep .mud-input.mud-input-outlined.mud-input-adorned-end {
+    padding-right: 0.3em;
+}
+
+.copy-buttonize ::deep .mud-input-outlined .mud-input-adornment-end {
+    margin-right: 1.3em;
+}
+
+.copy-buttonize ::deep .mud-input.mud-input-adorned-start input {
+    width: calc(100% - 3.7em);
+}
+
+/* filled  */
+.copy-buttonize ::deep .mud-input-filled input {
+    width: calc(100% - 2.5em);
+}
+
+.copy-buttonize ::deep .mud-input.mud-input-filled.mud-input-adorned-end {
+    padding-right: 0.3em;
+}
